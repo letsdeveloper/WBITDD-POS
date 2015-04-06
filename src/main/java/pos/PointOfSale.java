@@ -12,9 +12,8 @@ public class PointOfSale {
 
 	public void onBarcode(String barcode) {
 		if (isValid(barcode)) {
-			String price = itemStore.getPrice(barcode);
-			if (price != null) {
-				display.show(price);
+			if (itemStore.hasPrice(barcode)) {
+				display.show(itemStore.getPrice(barcode));
 			} else {
 				display.show("Unknown barcode.");
 			}

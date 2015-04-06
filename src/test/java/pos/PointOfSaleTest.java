@@ -73,5 +73,10 @@ public class PointOfSaleTest {
 			return items.get(barcode);
 		}
 
+		@Override
+		public boolean hasPrice(String barcode) {
+			return items.containsKey(barcode);
+		}
+
 	}
 }

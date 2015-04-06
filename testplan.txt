@@ -3,7 +3,7 @@ onBarcode(String) => POS => price/error message
 item store        =>
 
 
-valid barcode => item looked up => respective price
+[X] valid barcode => item looked up => respective price
 [X] valid barcode => no respective item => error message "unknown barcode"
 [X] invalid barcode (null) => => error message "invalid barcode"
 [X] invalid barcode (empty string) => => error message "invalid barcode"
