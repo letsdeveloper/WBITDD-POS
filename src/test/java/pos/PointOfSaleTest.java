@@ -18,6 +18,16 @@ public class PointOfSaleTest {
 	}
 
 	@Test
+	public void showsErrorMessageIfBarcodeIsEmptyString() {
+		TestDisplay testDisplay = new TestDisplay();
+		PointOfSale pos = new PointOfSale(testDisplay);
+
+		pos.onBarcode("");
+
+		assertThat(testDisplay.lastMessageShown, is("Invalid barcode."));
+	}
+
+	@Test
 	public void showUnknownBarcodeIfNoRespectiveItemIsKown() {
 		TestDisplay testDisplay = new TestDisplay();
 		PointOfSale pos = new PointOfSale(testDisplay);

@@ -17,7 +17,7 @@ public class PointOfSale {
 	}
 
 	private boolean isValid(String barcode) {
-		return barcode != null;
+		return barcode != null && !barcode.isEmpty();
 	}
 
 }
