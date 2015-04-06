@@ -3,14 +3,21 @@ package pos;
 public class PointOfSale {
 
 	private Display display;
+	private ItemStore itemStore;
 
-	public PointOfSale(Display display) {
+	public PointOfSale(Display display, ItemStore itemStore) {
 		this.display = display;
+		this.itemStore = itemStore;
 	}
 
 	public void onBarcode(String barcode) {
 		if (isValid(barcode)) {
-			display.show("Unknown barcode.");
+			String price = itemStore.getPrice(barcode);
+			if (price != null) {
+				display.show(price);
+			} else {
+				display.show("Unknown barcode.");
+			}
 		} else {
 			display.show("Invalid barcode.");
 		}
