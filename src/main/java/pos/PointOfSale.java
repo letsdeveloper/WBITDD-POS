@@ -12,13 +12,9 @@ public class PointOfSale {
 
 	public void onBarcode(String barcode) {
 		if (isValid(barcode)) {
-			if (itemStore.hasPrice(barcode)) {
-				display.show(itemStore.getPrice(barcode));
-			} else {
-				display.show("Unknown barcode.");
-			}
+			onValidBarcode(barcode);
 		} else {
-			display.show("Invalid barcode.");
+			onInvalidBarcode();
 		}
 	}
 
@@ -26,4 +22,15 @@ public class PointOfSale {
 		return barcode != null && !barcode.isEmpty();
 	}
 
+	private void onValidBarcode(String barcode) {
+		if (itemStore.hasPrice(barcode)) {
+			display.show(itemStore.getPrice(barcode));
+		} else {
+			display.show("Unknown barcode.");
+		}
+	}
+
+	private void onInvalidBarcode() {
+		display.show("Invalid barcode.");
+	}
 }
