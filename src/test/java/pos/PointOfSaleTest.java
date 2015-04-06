@@ -5,16 +5,24 @@ import static org.junit.Assert.assertThat;
 
 import java.util.Map;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class PointOfSaleTest {
 
+	private TestDisplay testDisplay;
+	private TestItemStore testItemStore;
+	private PointOfSale pos;
+
+	@Before
+	public void setUpPOS() {
+		testDisplay = new TestDisplay();
+		testItemStore = new TestItemStore();
+		pos = new PointOfSale(testDisplay, testItemStore);
+	}
+
 	@Test
 	public void showsErrorMessageIfBarcodeIsNull() {
-		TestDisplay testDisplay = new TestDisplay();
-		TestItemStore testItemStore = new TestItemStore();
-		PointOfSale pos = new PointOfSale(testDisplay, testItemStore);
-
 		pos.onBarcode(null);
 
 		assertThat(testDisplay.lastMessageShown, is("Invalid barcode."));
@@ -22,10 +30,6 @@ public class PointOfSaleTest {
 
 	@Test
 	public void showsErrorMessageIfBarcodeIsEmptyString() {
-		TestDisplay testDisplay = new TestDisplay();
-		TestItemStore testItemStore = new TestItemStore();
-		PointOfSale pos = new PointOfSale(testDisplay, testItemStore);
-
 		pos.onBarcode("");
 
 		assertThat(testDisplay.lastMessageShown, is("Invalid barcode."));
@@ -33,10 +37,6 @@ public class PointOfSaleTest {
 
 	@Test
 	public void showUnknownBarcodeIfNoRespectiveItemIsKown() {
-		TestDisplay testDisplay = new TestDisplay();
-		TestItemStore testItemStore = new TestItemStore();
-		PointOfSale pos = new PointOfSale(testDisplay, testItemStore);
-
 		pos.onBarcode("123456789");
 
 		assertThat(testDisplay.lastMessageShown, is("Unknown barcode."));
@@ -44,11 +44,8 @@ public class PointOfSaleTest {
 
 	@Test
 	public void showsPriceForItem() {
-		TestDisplay testDisplay = new TestDisplay();
-		TestItemStore testItemStore = new TestItemStore();
 		String barcode = "123234345";
 		testItemStore.registerItem(barcode, "$5.99");
-		PointOfSale pos = new PointOfSale(testDisplay, testItemStore);
 
 		pos.onBarcode(barcode);
 
