@@ -8,8 +8,16 @@ public class PointOfSale {
 		this.display = display;
 	}
 
-	public void onBarcode(Object object) {
-		display.show("Invalid barcode.");
+	public void onBarcode(String barcode) {
+		if (isValid(barcode)) {
+			display.show("Unknown barcode.");
+		} else {
+			display.show("Invalid barcode.");
+		}
+	}
+
+	private boolean isValid(String barcode) {
+		return barcode != null;
 	}
 
 }

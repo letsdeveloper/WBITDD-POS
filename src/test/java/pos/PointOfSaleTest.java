@@ -17,6 +17,16 @@ public class PointOfSaleTest {
 		assertThat(testDisplay.lastMessageShown, is("Invalid barcode."));
 	}
 
+	@Test
+	public void showUnknownBarcodeIfNoRespectiveItemIsKown() {
+		TestDisplay testDisplay = new TestDisplay();
+		PointOfSale pos = new PointOfSale(testDisplay);
+
+		pos.onBarcode("123456789");
+
+		assertThat(testDisplay.lastMessageShown, is("Unknown barcode."));
+	}
+
 	private static class TestDisplay implements Display {
 		public String lastMessageShown;
 
