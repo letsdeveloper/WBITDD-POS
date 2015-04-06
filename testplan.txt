@@ -5,4 +5,5 @@ item store        =>
 
 valid barcode => item looked up => respective price
 valid barcode => no respective item => error message "unknown barcode"
-invalid barcode (null, empty string) => => error message "invalid barcode"
+[X] invalid barcode (null) => => error message "invalid barcode"
+invalid barcode (empty string) => => error message "invalid barcode"
